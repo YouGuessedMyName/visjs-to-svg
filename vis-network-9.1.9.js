@@ -1059,6 +1059,8 @@
 	  ctx.beginPath();
 	  ctx.arc(x, y, r, 0, 2 * Math.PI, false);
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw a square.
@@ -1072,6 +1074,8 @@
 	  ctx.beginPath();
 	  ctx.rect(x - r, y - r, r * 2, r * 2);
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw an equilateral triangle standing on a side.
@@ -1097,6 +1101,8 @@
 	  ctx.lineTo(x - s2, y + ir);
 	  ctx.lineTo(x, y - (h - ir));
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw an equilateral triangle standing on a vertex.
@@ -1122,6 +1128,8 @@
 	  ctx.lineTo(x - s2, y - ir);
 	  ctx.lineTo(x, y + (h - ir));
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw a star.
@@ -1142,6 +1150,8 @@
 	    ctx.lineTo(x + radius * Math.sin(n * 2 * Math.PI / 10), y - radius * Math.cos(n * 2 * Math.PI / 10));
 	  }
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw a diamond.
@@ -1160,6 +1170,8 @@
 	  ctx.lineTo(x, y - r);
 	  ctx.lineTo(x - r, y);
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw a rectangle with rounded corners.
@@ -1192,6 +1204,8 @@
 	  ctx.lineTo(x, y + r);
 	  ctx.arc(x + r, y + r, r, r2d * 180, r2d * 270, false);
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw an ellipse.
@@ -1226,6 +1240,8 @@
 	  ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
 	  ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw an isometric cylinder.
@@ -1268,6 +1284,8 @@
 	  ctx.bezierCurveTo(xe, ymb + oy, xm + ox, yeb, xm, yeb);
 	  ctx.bezierCurveTo(xm - ox, yeb, x, ymb + oy, x, ymb);
 	  ctx.lineTo(x, ym);
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw a dashed line.
@@ -1312,6 +1330,8 @@
 	    distRemaining -= dashLength;
 	    draw = !draw;
 	  }
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	/**
 	 * Draw a hexagon.
@@ -1330,6 +1350,8 @@
 	    ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
 	  }
 	  ctx.closePath();
+	  ctx.stroke(); //SVG-PATCH
+	  ctx.fill(); //SVG-PATCH
 	}
 	var shapeMap = {
 	  circle: drawCircle,
@@ -21143,6 +21165,7 @@
 	      this.enableShadow(ctx, values);
 	      // draw the background
 	      _fillInstanceProperty(ctx).call(ctx);
+		  ctx.fill();
 	      // disable shadows for other elements.
 	      this.disableShadow(ctx, values);
 	      ctx.restore();
@@ -22263,7 +22286,7 @@
 	      this.top = y - this.height * 0.5;
 	      this.initContextForDraw(ctx, values);
 	      drawEllipse(ctx, this.left, this.top, this.width, this.height);
-	      this.performFill(ctx, values);
+		  this.performFill(ctx, values);
 	      this.updateBoundingBox(x, y, ctx, selected, hover);
 	      this.labelModule.draw(ctx, x, y, selected, hover);
 	    }
@@ -22797,7 +22820,6 @@
 	      // draw shadow if enabled
 	      this.enableShadow(ctx, values);
 	      this.labelModule.draw(ctx, this.left + this.textSize.width / 2 + this.margin.left, this.top + this.textSize.height / 2 + this.margin.top, selected, hover);
-
 	      // disable shadows for other elements.
 	      this.disableShadow(ctx, values);
 	      this.updateBoundingBox(x, y, ctx, selected, hover);
